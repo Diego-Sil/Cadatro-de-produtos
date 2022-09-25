@@ -13,11 +13,10 @@ let btnExcluir = document.getElementById('excluir')
 let tabela = document.querySelector('tbody')
 const produtos = JSON.parse(localStorage.getItem('produtos')) || []
 
-console.log(produtos)
-
 produtos.forEach((elemento)=>{
-    tabela.appendChild(criaTr(elemento.cod, elemento.fabric, elemento.ref, elemento.desc, elemento.quantEmb, elemento.preco, elemento.ean))
+     tabela.appendChild(criaTr(elemento))
 })
+
 
 form.addEventListener('submit',(event)=>{
     event.preventDefault()
@@ -31,23 +30,20 @@ form.addEventListener('submit',(event)=>{
     const ean = event.target.elements['ean']
     
     const produtoAtual = {
-        "Codigo": codigo.value,
-        "Fabricante": fabricante.value,
-        "Referencia": referencia.value,
-        "Descrição": descricao.value,
-        "Qauntida p/ embalagem": quantidade_embalagem.value,
-        "Preço": preco.value,
-        "Ean": ean.value
+        "codigo": codigo.value,
+        "fabricante": fabricante.value,
+        "referencia": referencia.value,
+        "descrição": descricao.value,
+        "quantidade_embalagem": quantidade_embalagem.value,
+        "preço": preco.value,
+        "ean": ean.value
     }
 
-    tabela.appendChild(criaTr(codigo.value, fabricante.value, referencia.value, descrição.value, quantidade_embalagem.value, preco.value, ean.value))
+    tabela.appendChild(criaTr(produtoAtual))
 
     produtos.push(produtoAtual)
 
-    
-    
-   
-   localStorage.setItem("Produtos", JSON.stringify(produtos))
+   localStorage.setItem("produtos", JSON.stringify(produtos))
    
    codigo.value = ''
    fabricante.value = ''
@@ -56,7 +52,10 @@ form.addEventListener('submit',(event)=>{
    quantidade_embalagem.value = ''
    preco.value = ''
    ean.value = ''
+   
 })
+
+console.log(produtos)
 
 function criaTd(dado){
     const td = document.createElement('td')
@@ -64,17 +63,16 @@ function criaTd(dado){
     return td
 }
 
-function criaTr(cod, fabric, ref, desc, quantEmb, preco,
-    ean){
+function criaTr(item){
 
-    const tr = document.createElement('tr')    
-    tr.appendChild(criaTd(cod))
-    tr.appendChild(criaTd(fabric))
-    tr.appendChild(criaTd(ref))
-    tr.appendChild(criaTd(desc))
-    tr.appendChild(criaTd(quantEmb))
-    tr.appendChild(criaTd(preco))
-    tr.appendChild(criaTd(ean))
+    const tr = document.createElement('tr')
+    tr.appendChild(criaTd(item.codigo))
+    tr.appendChild(criaTd(item.fabricante))
+    tr.appendChild(criaTd(item.referencia))
+    tr.appendChild(criaTd(item.descricao))
+    tr.appendChild(criaTd(item.quantidade_embalagem))
+    tr.appendChild(criaTd(item.preco))
+    tr.appendChild(criaTd(item.ean))
     
     return tr
 }
