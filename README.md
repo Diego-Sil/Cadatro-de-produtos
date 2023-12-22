@@ -12,3 +12,5 @@ Os campos serão verificados para que as entradas dos mesmos façam sentido.
 
 Após o cadastro, os produtos poderam ser alterados e excluidos caso seja necessario.
 
+Link para visualização do projeto
+https://diego-sil.github.io/Cadatro-de-produtos/
